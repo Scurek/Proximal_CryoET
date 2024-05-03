@@ -1,3 +1,7 @@
+**Publication**: https://ieeexplore.ieee.org/document/9992117
+
+**Supplementary Webpage** (Abstract, demo video, binaries): https://juareyra.github.io/Proximal_cryo-ET_supplementary/
+
 #### **Build using CMake on Windows**
 
 * Tested on Windows 10 x64 with CUDA Toolkit 11.3 and Visual Studio Community 2017
