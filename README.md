@@ -1,4 +1,4 @@
-**Publication**: https://ieeexplore.ieee.org/document/9992117
+**Publication**: [GPU Accelerated 3D Tomographic Reconstruction and Visualization from Noisy Electron Microscopy Tilt-Series](https://ieeexplore.ieee.org/document/9992117)
 
 **Supplementary Webpage** (Abstract, demo video, binaries): https://juareyra.github.io/Proximal_cryo-ET_supplementary/
 
