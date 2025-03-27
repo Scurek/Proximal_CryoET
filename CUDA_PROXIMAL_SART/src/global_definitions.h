@@ -166,7 +166,7 @@ void error()
 	}
 
 	printf("Program will exit\n");
-	_pause();
+	// _pause(); // Removed so it fails properly when lauched as a subprocess.
 	exit(0);
 }
 
