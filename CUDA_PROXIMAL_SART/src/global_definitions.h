@@ -167,7 +167,7 @@ void error()
 
 	printf("Program will exit\n");
 	// _pause(); // Removed so it fails properly when lauched as a subprocess.
-	exit(0);
+	exit(1);
 }
 
 //Computes the discrete gradient of the volume rec_vol
