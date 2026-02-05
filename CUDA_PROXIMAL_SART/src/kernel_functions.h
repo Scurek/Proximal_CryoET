@@ -51,6 +51,7 @@ __device__ __managed__ float i_0 = 0; //For linearizing projections / delineariz
 __device__ __managed__ bool ignore_padding = true;
 __device__ __managed__ bool nonnegativity = true;
 __device__ __managed__ float huber_lambda = 1;
+__device__ __managed__ int gpu = 0;
 
 //Kernel lookup table
 //20001 values from 0 to 2 in steps of 0.0001

@@ -1076,7 +1076,7 @@ void allocate_memory()
 	size_t gpu_memory_size = 0;
 	
 	// Choose which GPU to run on, change this on a multi-GPU system.
-	cudaStatus = cudaSetDevice(0);
+	cudaStatus = cudaSetDevice(gpu);
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "cudaSetDevice failed:  Do you have a CUDA-capable GPU installed?\n%s\n", cudaGetErrorString(cudaStatus));
 		error();
@@ -1759,7 +1759,16 @@ void parse_commands(int argc, char **argv)
 	else
 	{
 		data_term_iters = 2; //Default value
-	}		
+	}
+
+	arg = "gpu";
+	argument = find(argument_list.begin(), argument_list.end(), arg.c_str());
+	if (argument != argument_list.end()) //If nothing found, argument points to argument_list.end()
+	{
+		gpu = stoi(*(++argument)); //Retrieve parameter value
+	} else {
+		gpu = 0;
+	}
 
 	arg = "proximal_iters";
 	argument = find(argument_list.begin(), argument_list.end(), arg.c_str());
@@ -2314,6 +2323,7 @@ void parse_commands(int argc, char **argv)
 
 	if ((alg <= 3) || (alg == 16) || (alg == 28) || ((alg >= 20) && (alg <= 23)))
 	{
+		printf("GPU: %d\n", gpu);
 		printf("# data term iters: %d\n", data_term_iters);
 		if ((alg <= 3) || (alg == 28))
 			printf("# Proximal iters: %d\n", proximal_iters);
@@ -2571,7 +2581,7 @@ void linearize_projections()
 		data_size = h_proj_data.size() * sizeof(float);
 
 		// Choose which GPU to run on, change this on a multi-GPU system.
-		cudaStatus = cudaSetDevice(0);
+		cudaStatus = cudaSetDevice(gpu);
 		if (cudaStatus != cudaSuccess) {
 			fprintf(stderr, "cudaSetDevice failed:  Do you have a CUDA-capable GPU installed?\n%s\n", cudaGetErrorString(cudaStatus));
 			error();
@@ -2680,7 +2690,7 @@ void delinearize_volume()
 		printf("depth: %i\n", vdim.z);
 
 		// Choose which GPU to run on, change this on a multi-GPU system.
-		cudaStatus = cudaSetDevice(0);
+		cudaStatus = cudaSetDevice(gpu);
 		if (cudaStatus != cudaSuccess) {
 			fprintf(stderr, "cudaSetDevice failed:  Do you have a CUDA-capable GPU installed?\n%s\n", cudaGetErrorString(cudaStatus));
 			error();
@@ -2845,7 +2855,7 @@ void histogram_equalization()
 	h_per_slice = new float[vdim.z];
 
 	// Choose which GPU to run on, change this on a multi-GPU system.
-	cudaStatus = cudaSetDevice(0);
+	cudaStatus = cudaSetDevice(gpu);
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "cudaSetDevice failed:  Do you have a CUDA-capable GPU installed?\n%s\n", cudaGetErrorString(cudaStatus));
 		error();
@@ -2964,7 +2974,7 @@ void volume_histogram()
 	h_per_slice = new float[vdim.z];
 
 	// Choose which GPU to run on, change this on a multi-GPU system.
-	cudaStatus = cudaSetDevice(0);
+	cudaStatus = cudaSetDevice(gpu);
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "cudaSetDevice failed:  Do you have a CUDA-capable GPU installed?\n%s\n", cudaGetErrorString(cudaStatus));
 		error();
@@ -3405,7 +3415,7 @@ void normalize_volume_zero_one(float normalize_max = 1)
 	h_per_slice = new float[vdim.z];
 
 	// Choose which GPU to run on, change this on a multi-GPU system.
-	cudaStatus = cudaSetDevice(0);
+	cudaStatus = cudaSetDevice(gpu);
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "cudaSetDevice failed:  Do you have a CUDA-capable GPU installed?\n%s\n", cudaGetErrorString(cudaStatus));
 		error();
