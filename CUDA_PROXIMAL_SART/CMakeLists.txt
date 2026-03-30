@@ -13,7 +13,14 @@ set(SOURCES src/main.cu src/proximal_iteration.h src/linearized_admm.h src/admm.
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES native)
+# Accept CUDA_ARCHITECTURES from CMake (e.g., -DCUDA_ARCHITECTURES=80 from Dockerfile)
+# Default to "native" if not specified
+set(CUDA_ARCH_VALUE "native" CACHE STRING "CUDA Compute Capability")
+if(DEFINED CUDA_ARCHITECTURES)
+  set(CUDA_ARCH_VALUE "${CUDA_ARCHITECTURES}")
+endif()
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES ${CUDA_ARCH_VALUE})
 
 # This might work for older CMake versions
 # if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24")
